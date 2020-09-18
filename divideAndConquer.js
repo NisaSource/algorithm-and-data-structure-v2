@@ -49,3 +49,41 @@ const bubbleSort = (arr) => {
 
 console.log('----------TASK 2----------');
 console.log(bubbleSort([2, 15, 8, 34, 9, 13]));
+
+// Given an unsorted array, write a func that return
+// that arr to be sorted
+
+const mergeSort = (arr) => {
+	if (arr.length === 1) {
+		return arr;
+	}
+
+	const middle = Math.floor(arr.length / 2);
+	const left = arr.slice(0, middle);
+	const right = arr.slice(middle);
+	const sortedLeft = mergeSort(left);
+	const sortedRight = mergeSort(right);
+	return mergeArr(sortedLeft, sortedRight);
+};
+
+const mergeArr = (arr1, arr2) => {
+	let result = [];
+	let i = 0;
+	let j = 0;
+
+	while (i < arr1.length && j < arr2.length) {
+		// compare the elements
+		if (arr1[i] < arr2[j]) {
+			result.push(arr1[i]);
+			i++;
+		} else {
+			result.push(arr2[j]);
+			j++;
+		}
+	}
+
+	return result.concat(arr1.slice(i)).concat(arr2.slice(j));
+};
+
+console.log('----------TASK 3----------');
+console.log(mergeSort([2, 15, 8, 34, 9, 13, 32, 4, 12]));
